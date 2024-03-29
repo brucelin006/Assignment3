@@ -9,7 +9,7 @@ class App:
         # setting title and config window size
         root.title("Car Driving Analyzer")
         width = 263
-        height = 403
+        height = 420
         screenwidth = root.winfo_screenwidth()
         screenheight = root.winfo_screenheight()
         alignstr = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)
@@ -86,30 +86,37 @@ class App:
         driving_risk_label.place(x=10, y=330, width=109, height=30)
 
         # Create Driving Risk value
-        self.risk_level_msg = tk.Message(root)
+        self.risk_level_msg = tk.Message(root, width=100)
         risk_level_msg = self.risk_level_msg
-        ft = tkFont.Font(family='Times', size=15)
+        ft = tkFont.Font(family='Times', size=15, weight=tkFont.BOLD)
         risk_level_msg["font"] = ft
         risk_level_msg["fg"] = "#333333"
         risk_level_msg["justify"] = "left"
         risk_level_msg["text"] = ""
-        #risk_level_msg.place(x=120, y=333, width=80, height=25)
-        risk_level_msg.place(x=120, y=333, width=80, height=55)
+        risk_level_msg.place(x=115, y=323, width=112, height=43)
+
+        self.error_msg = tk.Message(root, fg="red", width=200)
+        error_msg = self.error_msg
+        error_msg["text"] = ""
+        error_msg["font"] = tkFont.Font(family='Times', size=13)
+        error_msg.place(x=10, y=355, width=250, height=50)
+
         root.mainloop()
 
-
     def analyze_weather(self):
-        snow_precipitation = int(self.snow_prec_entry.get())
-        wind_speed = int(self.wind_speed_entry.get())
-
-        # Print the values
-        print("Snow precipitation:", snow_precipitation)
-        print("Wind speed:", wind_speed)
-
-        risk = fuzzy.get_fuzzy_output(wind_speed, snow_precipitation)
-        print(risk)
-        self.risk_level_msg.config(text=str(risk))
-
+        try:
+            snow_precipitation = int(self.snow_prec_entry.get())
+            wind_speed = int(self.wind_speed_entry.get())
+            risk = fuzzy.get_fuzzy_output(wind_speed, snow_precipitation)
+            self.risk_level_msg.config(text=str(risk))
+            self.error_msg.config(text="")
+        except Exception as e:
+            error_message = str(e)
+            if "invalid literal" in error_message:
+                error_message = "Snow precipitation and Wind speed only allow number"
+            # Display the error message
+            self.error_msg.config(text=error_message)
+            self.risk_level_msg.config(text="")
 
 
 if __name__ == "__main__":
