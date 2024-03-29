@@ -1,3 +1,6 @@
+"""
+Authors: Gia Ky Huynh, Gaici Lin
+"""
 import tkinter as tk
 import tkinter.font as tkFont
 import fuzzylogic as fuzzy
@@ -103,6 +106,7 @@ class App:
 
         root.mainloop()
 
+    # method to integrate with fuzzy logic
     def analyze_weather(self):
         try:
             snow_precipitation = int(self.snow_prec_entry.get())

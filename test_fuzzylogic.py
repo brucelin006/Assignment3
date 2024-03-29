@@ -1,3 +1,6 @@
+"""
+Authors: Gaici Lin, Gia Ky Huynh
+"""
 import pytest
 from fuzzylogic import get_fuzzy_output
 

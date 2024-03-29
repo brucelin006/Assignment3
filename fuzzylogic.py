@@ -1,3 +1,6 @@
+"""
+Authors: Gaici Lin, Gia Ky Huynh
+"""
 from typing import Union
 from matplotlib import pyplot as plt
 import numpy as np
