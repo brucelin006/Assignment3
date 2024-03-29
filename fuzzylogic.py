@@ -8,6 +8,7 @@ from skfuzzy import control as ctrl
 def get_fuzzy_output(
     wind_speed: Union[int, float],
     snow_precipitation: Union[int, float],
+    show_mf: bool = False,
 ) -> str:
     if wind_speed is None or snow_precipitation is None:
         raise ValueError("Wind speed and snow precipitation cannot be None.")
@@ -71,17 +72,18 @@ def get_fuzzy_output(
     result = driving.output["risk"]
     print(f"risk: {result:.1f}")
 
-    wind.view()
-    snow.view()
-    risk.view()
-    risk.view(sim=driving)
-    plt.show()
-   
+    if show_mf:
+        wind.view()
+        snow.view()
+        risk.view()
+        risk.view(sim=driving)
+        plt.show()
+
     if result <= 4:
-        return 'Low'
+        return "Low"
     elif result <= 7:
-        return 'Medium'
+        return "Medium"
     elif result <= 10:
-        return 'High'
+        return "High"
     else:
-        return 'Unknown'
+        return "Unknown"
