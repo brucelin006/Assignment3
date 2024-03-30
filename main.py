@@ -109,14 +109,14 @@ class App:
     # method to integrate with fuzzy logic
     def analyze_weather(self):
         try:
-            snow_precipitation = int(self.snow_prec_entry.get())
-            wind_speed = int(self.wind_speed_entry.get())
+            snow_precipitation = float(self.snow_prec_entry.get())
+            wind_speed = float(self.wind_speed_entry.get())
             risk = fuzzy.get_fuzzy_output(wind_speed, snow_precipitation)
             self.risk_level_msg.config(text=str(risk))
             self.error_msg.config(text="")
         except Exception as e:
             error_message = str(e)
-            if "invalid literal" in error_message:
+            if "could not convert string to float" in error_message:
                 error_message = "Snow precipitation and Wind speed only allow number"
             # Display the error message
             self.error_msg.config(text=error_message)

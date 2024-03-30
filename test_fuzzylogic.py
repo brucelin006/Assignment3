@@ -60,11 +60,31 @@ def test_negative_inputs():
     with pytest.raises(ValueError):
         get_fuzzy_output(-1, -5)
 
+def test_wind_speed_negative_and_snow_precipitation_positive_input():
+    # Should raise ValueError for negative inputs
+    with pytest.raises(ValueError):
+        get_fuzzy_output(-1, 0)
+
+def test_wind_speed_positive_and_snow_precipitation_negative_input():
+    # Should raise ValueError for negative inputs
+    with pytest.raises(ValueError):
+        get_fuzzy_output(10, -5)
+
 
 def test_zero_inputs():
     # Should raise ValueError for negative inputs
     with pytest.raises(ValueError):
         get_fuzzy_output(0, 0)
+
+def test_wind_speed_zero_and_snow_precipitation_positive_input():
+    # Should raise ValueError for negative inputs
+    with pytest.raises(ValueError):
+        get_fuzzy_output(0, 5)
+
+def test_wind_speed_positive_and_snow_precipitation_zero_input():
+    # Should raise ValueError for negative inputs
+    with pytest.raises(ValueError):
+        get_fuzzy_output(5, 0)
 
 
 def test_inputs_are_none():
