@@ -1,6 +1,7 @@
 """
 Authors: Gaici Lin, Gia Ky Huynh
 """
+
 from typing import Union
 from matplotlib import pyplot as plt
 import numpy as np
@@ -55,7 +56,9 @@ def get_fuzzy_output(
     rules = []
 
     rules.append(ctrl.Rule(snow["light"] & wind["gentle"], risk["low"]))
-    rules.append(ctrl.Rule(snow["moderate"] | wind["moderate"], risk["medium"]))
+    rules.append(ctrl.Rule(snow["moderate"] & wind["gentle"], risk["medium"]))
+    rules.append(ctrl.Rule(snow["light"] & wind["moderate"], risk["medium"]))
+    rules.append(ctrl.Rule(snow["moderate"] & wind["moderate"], risk["medium"]))
     rules.append(ctrl.Rule(snow["heavy"] | wind["strong"], risk["high"]))
     rules.append(ctrl.Rule(snow["very heavy"], risk["high"]))
 
