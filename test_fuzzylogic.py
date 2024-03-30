@@ -1,6 +1,7 @@
 """
 Authors: Gaici Lin, Gia Ky Huynh
 """
+
 import pytest
 from fuzzylogic import get_fuzzy_output
 
@@ -17,7 +18,7 @@ from fuzzylogic import get_fuzzy_output
 
 
 def test_normal_case():
-    # Normal case should not raise any exceptions and should return a float
+    # Normal case should not raise any exceptions and should return a str
     result = get_fuzzy_output(12.55, 23.4)
     assert isinstance(result, str), "The result should be a str"
 
@@ -49,7 +50,7 @@ def test_very_heavy_snow_return_high_risk():
 
 
 def test_inputs_are_int():
-    # Testing the integer inputs, should return a float
+    # Testing the integer inputs, should return a str
     result = get_fuzzy_output(48, 199)
     assert isinstance(result, str), "The result should be a str"
 
