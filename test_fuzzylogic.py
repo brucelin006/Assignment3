@@ -28,11 +28,18 @@ def test_light_snow_and_gentle_wind_return_low_risk():
     assert result == "Low"
 
 
-def test_moderate_snow_or_moderate_wind_return_medium_risk():
+def test_moderate_snow_and_gentle_wind_return_medium_risk():
     result = get_fuzzy_output(10, 93.4)
     assert result == "Medium"
 
-    result = get_fuzzy_output(24, 100)
+
+def test_light_snow_and_moderate_wind_return_medium_risk():
+    result = get_fuzzy_output(24, 13.4)
+    assert result == "Medium"
+
+
+def test_moderate_snow_and_moderate_wind_return_medium_risk():
+    result = get_fuzzy_output(24, 93.4)
     assert result == "Medium"
 
 
@@ -60,10 +67,12 @@ def test_negative_inputs():
     with pytest.raises(ValueError):
         get_fuzzy_output(-1, -5)
 
+
 def test_wind_speed_negative_and_snow_precipitation_positive_input():
     # Should raise ValueError for negative inputs
     with pytest.raises(ValueError):
         get_fuzzy_output(-1, 0)
+
 
 def test_wind_speed_positive_and_snow_precipitation_negative_input():
     # Should raise ValueError for negative inputs
@@ -76,10 +85,12 @@ def test_zero_inputs():
     with pytest.raises(ValueError):
         get_fuzzy_output(0, 0)
 
+
 def test_wind_speed_zero_and_snow_precipitation_positive_input():
     # Should raise ValueError for negative inputs
     with pytest.raises(ValueError):
         get_fuzzy_output(0, 5)
+
 
 def test_wind_speed_positive_and_snow_precipitation_zero_input():
     # Should raise ValueError for negative inputs
